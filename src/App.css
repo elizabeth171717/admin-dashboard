@@ -50,7 +50,24 @@
   cursor: pointer;
 }
 
+.receipt {
+  font-family: 'Courier New', Courier, monospace;
+  max-width: 400px;
+  margin: auto;
+  padding: 16px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: .50rem;
+}
+.receipt h2 {
+  margin-bottom: 0.25rem;
+}
 
+.justify-between{
+  display: flex;
+  justify-content: space-between;
+}
 
 @media print {
   body * {
@@ -69,6 +86,8 @@
     width: 57mm;
     font-size: 12px;
   }
+
+
 }
 
 
