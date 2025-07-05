@@ -4,22 +4,32 @@ import Receipt from "../components/Receipt";
 
 const RricuraOrders = () => {
   const [orders, setOrders] = useState([]);
-
   const [selectedOrderId, setSelectedOrderId] = useState(null);
-  const selectedOrder = orders.find((o) => o._id === selectedOrderId);
+  const [searchName, setSearchName] = useState("");
+  const [searchEmail, setSearchEmail] = useState("");
+  const [searchOrderNumber, setSearchOrderNumber] = useState("");
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
   const receiptRef = useRef();
 
-  const handlePrint = useReactToPrint({
+  const printReceipt = useReactToPrint({
     content: () => receiptRef.current,
-    documentTitle: `Receipt-${selectedOrder?.orderNumber}`,
+    documentTitle: `Receipt-${
+      orders.find((o) => o._id === selectedOrderId)?.orderNumber
+    }`,
   });
+
+  const handlePrint = (order) => {
+    setSelectedOrderId(order._id);
+    setTimeout(() => {
+      printReceipt();
+    }, 100);
+  };
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch(
-          "https://elizabeth-backend.onrender.com/api/rricura/orders"
-        );
+        const res = await fetch("http://localhost:5000/api/rricura/orders");
         const data = await res.json();
         setOrders(data);
       } catch (err) {
@@ -30,160 +40,184 @@ const RricuraOrders = () => {
     fetchOrders();
   }, []);
 
-  const [searchName, setSearchName] = useState("");
-  const [filterStatus, setFilterStatus] = useState("");
-  const [filterDate, setFilterDate] = useState("");
-  const [filteredOrders, setFilteredOrders] = useState([]);
-
   const fetchFilteredOrders = async () => {
     const params = new URLSearchParams();
-
     if (searchName) params.append("name", searchName);
-    if (filterStatus) params.append("status", filterStatus);
-    if (filterDate) params.append("date", filterDate);
+    if (searchEmail) params.append("email", searchEmail);
+    if (searchOrderNumber) params.append("orderNumber", searchOrderNumber);
 
-    const res = await fetch(`/api/rricura/orders?${params.toString()}`);
-    const data = await res.json();
-    setFilteredOrders(data);
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/rricura/orders?${params.toString()}`
+      );
+      const data = await res.json();
+      setFilteredOrders(data);
+    } catch (err) {
+      console.error("Error fetching filtered orders", err);
+    }
   };
+
+  const displayedOrders = filteredOrders.length > 0 ? filteredOrders : orders;
 
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-title">Rricura Orders</h2>
-      <div className="search-input">
+
+      {/* Search Filters */}
+      <div className="search-filters">
         <input
           type="text"
           placeholder="Search by name"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
-          className="p-2 border rounded"
         />
-
-        <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          className="p-2 border rounded"
-        >
-          <option value="">All Statuses</option>
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="delivered">Delivered</option>
-          <option value="cancelled">Cancelled</option>
-        </select>
-
         <input
-          type="date"
-          value={filterDate}
-          onChange={(e) => setFilterDate(e.target.value)}
-          className="p-2 border rounded"
+          type="text"
+          placeholder="Search by order #"
+          value={searchOrderNumber}
+          onChange={(e) => setSearchOrderNumber(e.target.value)}
         />
-
+        <input
+          type="text"
+          placeholder="Search by email"
+          value={searchEmail}
+          onChange={(e) => setSearchEmail(e.target.value)}
+        />
+        <button onClick={fetchFilteredOrders}>Search</button>
         <button
-          onClick={fetchFilteredOrders}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          onClick={() => {
+            setSearchName("");
+            setSearchEmail("");
+            setSearchOrderNumber("");
+            fetchFilteredOrders();
+          }}
         >
-          Filter
+          Reset
         </button>
       </div>
-      {filteredOrders.map((order) => (
-        <div key={order._id}>
-          <p>
-            <strong>{order.customerInfo.name}</strong> - {order.status} -{" "}
-            {order.deliveryDate}
-          </p>
-        </div>
-      ))}
 
+      {/* Order Table */}
       <div className="table-wrapper">
         <table className="orders-table">
           <thead>
             <tr>
               <th>Name</th>
               <th>Order #</th>
-
               <th>Email</th>
-              <th>Phone</th>
-              <th>Items</th>
               <th>Subtotal</th>
-              <th>Tax</th>
-              <th>Delivery Fee</th>
-              <th>Tip</th>
               <th>Total</th>
               <th>Delivery Date</th>
-              <th>Delivery Address</th>
-              <th>Ordered</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr
-                key={order._id}
-                className="order-row"
-                onClick={() =>
-                  setSelectedOrderId(
-                    selectedOrderId === order._id ? null : order._id
-                  )
-                }
-              >
-                <td>{order.customerName}</td>
-                <td>{order.orderNumber}</td>
+            {displayedOrders.map((order) => {
+              const isExpanded = selectedOrderId === order._id;
 
-                <td>{order.customerEmail}</td>
-                <td>{order.customerPhone}</td>
-                <td>
-                  <ul className="items-list">
-                    {order.items?.map((item, index) => (
-                      <li key={index}>
-                        {item.quantity} {item.unit || ""} {item.name} — $
-                        {(item.basePrice * item.quantity).toFixed(2)}
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-                <td>${order.subtotal?.toFixed(2)}</td>
-                <td>${order.tax?.toFixed(2)}</td>
-                <td>
-                  {order.deliveryAddress?.fee
-                    ? `$${order.deliveryAddress.fee.toFixed(2)}`
-                    : "-"}
-                </td>
-                <td>
-                  $
-                  {typeof order.tip === "number"
-                    ? order.tip.toFixed(2)
-                    : "0.00"}
-                </td>
-                <td>${order.total?.toFixed(2)}</td>
-                <td>
-                  {order.deliveryDate} at {order.deliveryTime}
-                </td>
-                <td>
-                  {order.deliveryAddress?.fullAddress ||
-                    `${order.deliveryAddress?.street}, ${order.deliveryAddress?.city}, ${order.deliveryAddress?.state} ${order.deliveryAddress?.zip}`}
-                </td>
-                <td>
-                  {order.createdAt && (
-                    <div>
-                      {new Date(order.createdAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </div>
+              return (
+                <React.Fragment key={order._id}>
+                  <tr
+                    className="order-row"
+                    onClick={() =>
+                      setSelectedOrderId(isExpanded ? null : order._id)
+                    }
+                  >
+                    <td>{order.customerName}</td>
+                    <td>{order.orderNumber}</td>
+                    <td>{order.customerEmail}</td>
+                    <td>${order.subtotal?.toFixed(2)}</td>
+                    <td>${order.total?.toFixed(2)}</td>
+                    <td>
+                      {order.deliveryDate} at {order.deliveryTime}
+                    </td>
+                    <td>{order.status || "Pending"}</td>
+                    <td>
+                      <button
+                        className="print-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePrint(order);
+                        }}
+                      >
+                        🖨️ Print
+                      </button>
+                    </td>
+                  </tr>
+
+                  {isExpanded && (
+                    <tr className="expanded-row">
+                      <td colSpan="8">
+                        <div className="expanded-content">
+                          <p>
+                            <strong>Phone:</strong> {order.customerPhone}
+                          </p>
+                          <p>
+                            <strong>Items:</strong>
+                          </p>
+                          <ul>
+                            {order.items?.map((item, idx) => (
+                              <li key={idx}>
+                                {item.quantity} {item.unit || ""} {item.name} —
+                                ${(item.basePrice * item.quantity).toFixed(2)}
+                              </li>
+                            ))}
+                          </ul>
+                          <p>
+                            <strong>Tax:</strong> ${order.tax?.toFixed(2)}
+                          </p>
+                          <p>
+                            <strong>Delivery Fee:</strong> $
+                            {order.deliveryAddress?.fee?.toFixed(2) || "0.00"}
+                          </p>
+                          <p>
+                            <strong>Tip:</strong> $
+                            {order.tip?.toFixed(2) || "0.00"}
+                          </p>
+                          <p>
+                            <strong>Address:</strong>{" "}
+                            {order.deliveryAddress?.fullAddress}
+                          </p>
+                          {order.deliveryAddress?.instructions && (
+                            <p>
+                              <strong>Instructions:</strong>{" "}
+                              {order.deliveryAddress.instructions}
+                            </p>
+                          )}
+                          {order.message && (
+                            <p>
+                              <strong>Message:</strong> {order.message}
+                            </p>
+                          )}
+                          {order.createdAt && (
+                            <p>
+                              <strong>Ordered:</strong>{" "}
+                              {new Date(order.createdAt).toLocaleDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )}
+                            </p>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
                   )}
-                </td>
-              </tr>
-            ))}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       </div>
-      {selectedOrder && (
-        <div className="print-section">
-          <button onClick={handlePrint} className="print-button">
-            🖨️ Print Receipt
-          </button>
+
+      {/* Hidden Receipt for Printing */}
+      {selectedOrderId && (
+        <div style={{ display: "none" }}>
           <div ref={receiptRef}>
-            <Receipt order={selectedOrder} />
+            <Receipt order={orders.find((o) => o._id === selectedOrderId)} />
           </div>
         </div>
       )}
