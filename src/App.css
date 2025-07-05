@@ -3,7 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.search-input{
+  margin: 1rem 0;
+  display: flex;
+  gap: .50rem;
+}
 .dashboard-container {
   padding: 24px;
 }

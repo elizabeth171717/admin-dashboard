@@ -30,9 +30,70 @@ const RricuraOrders = () => {
     fetchOrders();
   }, []);
 
+  const [searchName, setSearchName] = useState("");
+  const [filterStatus, setFilterStatus] = useState("");
+  const [filterDate, setFilterDate] = useState("");
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
+  const fetchFilteredOrders = async () => {
+    const params = new URLSearchParams();
+
+    if (searchName) params.append("name", searchName);
+    if (filterStatus) params.append("status", filterStatus);
+    if (filterDate) params.append("date", filterDate);
+
+    const res = await fetch(`/api/rricura/orders?${params.toString()}`);
+    const data = await res.json();
+    setFilteredOrders(data);
+  };
+
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-title">Rricura Orders</h2>
+      <div className="search-input">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchName}
+          onChange={(e) => setSearchName(e.target.value)}
+          className="p-2 border rounded"
+        />
+
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+          className="p-2 border rounded"
+        >
+          <option value="">All Statuses</option>
+          <option value="pending">Pending</option>
+          <option value="in-progress">In Progress</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+
+        <input
+          type="date"
+          value={filterDate}
+          onChange={(e) => setFilterDate(e.target.value)}
+          className="p-2 border rounded"
+        />
+
+        <button
+          onClick={fetchFilteredOrders}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Filter
+        </button>
+      </div>
+      {filteredOrders.map((order) => (
+        <div key={order._id}>
+          <p>
+            <strong>{order.customerInfo.name}</strong> - {order.status} -{" "}
+            {order.deliveryDate}
+          </p>
+        </div>
+      ))}
+
       <div className="table-wrapper">
         <table className="orders-table">
           <thead>
