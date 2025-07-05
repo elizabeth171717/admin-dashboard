@@ -29,7 +29,9 @@ const RricuraOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/rricura/orders");
+        const res = await fetch(
+          "https://elizabeth-backend.onrender.com/api/rricura/orders"
+        );
         const data = await res.json();
         setOrders(data);
       } catch (err) {
@@ -48,7 +50,7 @@ const RricuraOrders = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/rricura/orders?${params.toString()}`
+        `https://elizabeth-backend.onrender.com/api/rricura/orders?${params.toString()}`
       );
       const data = await res.json();
       setFilteredOrders(data);
