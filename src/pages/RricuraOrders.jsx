@@ -61,6 +61,36 @@ const RricuraOrders = () => {
 
   const displayedOrders = filteredOrders.length > 0 ? filteredOrders : orders;
 
+  const markAsDelivered = async (orderId) => {
+    try {
+      const res = await fetch(
+        `https://elizabeth-backend.onrender.com/api/rricura/orders/${orderId}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "Delivered" }),
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to update status");
+
+      const updatedOrder = await res.json();
+
+      // Update local state (filteredOrders or orders)
+      setOrders((prev) =>
+        prev.map((o) => (o._id === orderId ? updatedOrder : o))
+      );
+
+      setFilteredOrders((prev) =>
+        prev.map((o) => (o._id === orderId ? updatedOrder : o))
+      );
+    } catch (err) {
+      console.error("❌ Error updating status:", err);
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-title">Rricura Orders</h2>
@@ -133,7 +163,29 @@ const RricuraOrders = () => {
                     <td>
                       {order.deliveryDate} at {order.deliveryTime}
                     </td>
-                    <td>{order.status || "Pending"}</td>
+                    <td>
+                      {order.status}
+                      {order.status === "Pending" && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent row toggle
+                            markAsDelivered(order._id);
+                          }}
+                          style={{
+                            marginLeft: "10px",
+                            padding: "4px 8px",
+                            backgroundColor: "green",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Mark as Delivered
+                        </button>
+                      )}
+                    </td>
+
                     <td>
                       <button
                         className="print-button"
