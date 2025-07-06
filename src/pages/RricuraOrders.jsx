@@ -30,7 +30,7 @@ const RricuraOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          "https://rricura-ordering-form-backend.onrender.com/api/rricura/orders"
+          "https://elizabeth-backend.onrender.com/api/rricura/orders"
         );
         const data = await res.json();
         setOrders(data);
@@ -50,7 +50,7 @@ const RricuraOrders = () => {
 
     try {
       const res = await fetch(
-        `https://rricura-ordering-form-backend.onrender.com/api/rricura/orders?${params.toString()}`
+        `https://elizabeth-backend.onrender.com/api/rricura/orders?${params.toString()}`
       );
       const data = await res.json();
       setFilteredOrders(data);
