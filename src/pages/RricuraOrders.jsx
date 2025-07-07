@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import Receipt from "../components/Receipt";
 
+const CLIENT_ID = "rricura"; //
+
 const RricuraOrders = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
@@ -30,7 +32,7 @@ const RricuraOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          "https://elizabeth-backend.onrender.com/api/rricura/orders"
+          `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/orders`
         );
         const data = await res.json();
         setOrders(data);
@@ -50,7 +52,7 @@ const RricuraOrders = () => {
 
     try {
       const res = await fetch(
-        `https://elizabeth-backend.onrender.com/api/rricura/orders?${params.toString()}`
+        `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/orders?${params.toString()}`
       );
       const data = await res.json();
       setFilteredOrders(data);
@@ -64,7 +66,7 @@ const RricuraOrders = () => {
   const markAsDelivered = async (orderId) => {
     try {
       const res = await fetch(
-        `https://elizabeth-backend.onrender.com/api/rricura/orders/${orderId}/status`,
+        `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/orders/${orderId}/status`,
         {
           method: "PATCH",
           headers: {
@@ -93,6 +95,7 @@ const RricuraOrders = () => {
 
   return (
     <div className="dashboard-container">
+      <a href="/">← Back to Dashboard</a>
       <h2 className="dashboard-title">Rricura Orders</h2>
 
       {/* Search Filters */}

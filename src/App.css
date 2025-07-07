@@ -4,7 +4,25 @@
   box-sizing: border-box;
 }
 
+/*home-page*/
+.home-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin:1rem;
+  gap:2rem;
+}
 
+
+.dashboard-links a {
+  display: flex;
+  align-items: center;
+}
+
+
+/*home-page*/
 .dashboard-container {
   padding: 1rem;
 }
