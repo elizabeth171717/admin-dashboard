@@ -11,7 +11,7 @@ export default function PortfolioContacts() {
     const fetchContacts = async () => {
       try {
         const res = await fetch(
-          `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/contacts`
+          `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/contacts`
         );
         const data = await res.json();
         setResponses(data);
@@ -30,7 +30,7 @@ export default function PortfolioContacts() {
 
     try {
       const res = await fetch(
-        `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/contacts?${params.toString()}`
+        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/contacts?${params.toString()}`
       );
       const data = await res.json();
       setFilteredContacts(data);

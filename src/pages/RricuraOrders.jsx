@@ -32,7 +32,7 @@ const RricuraOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/orders`
+          `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders`
         );
         const data = await res.json();
         setOrders(data);
@@ -52,7 +52,7 @@ const RricuraOrders = () => {
 
     try {
       const res = await fetch(
-        `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/orders?${params.toString()}`
+        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders?${params.toString()}`
       );
       const data = await res.json();
       setFilteredOrders(data);
@@ -66,7 +66,7 @@ const RricuraOrders = () => {
   const markAsDelivered = async (orderId) => {
     try {
       const res = await fetch(
-        `https://rricura-ordering-form-backend.onrender.com/api/${CLIENT_ID}/orders/${orderId}/status`,
+        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders/${orderId}/status`,
         {
           method: "PATCH",
           headers: {
