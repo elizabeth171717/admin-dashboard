@@ -11,7 +11,7 @@ export default function PortfolioContacts() {
     const fetchContacts = async () => {
       try {
         const res = await fetch(
-          `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/contacts`
+          `http://localhost:5000/api/${CLIENT_ID}/contacts`
         );
         const data = await res.json();
         setResponses(data);
@@ -30,7 +30,7 @@ export default function PortfolioContacts() {
 
     try {
       const res = await fetch(
-        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/contacts?${params.toString()}`
+        `http://localhost:5000/api/${CLIENT_ID}/contacts?${params.toString()}`
       );
       const data = await res.json();
       setFilteredContacts(data);

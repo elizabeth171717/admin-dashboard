@@ -32,7 +32,7 @@ const RricuraOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders`
+          `http://localhost:5000/api/${CLIENT_ID}/orders`
         );
         const data = await res.json();
         setOrders(data);
@@ -52,7 +52,7 @@ const RricuraOrders = () => {
 
     try {
       const res = await fetch(
-        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders?${params.toString()}`
+        `http://localhost:5000/api/${CLIENT_ID}/orders?${params.toString()}`
       );
       const data = await res.json();
       setFilteredOrders(data);
@@ -66,7 +66,7 @@ const RricuraOrders = () => {
   const markAsDelivered = async (orderId) => {
     try {
       const res = await fetch(
-        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders/${orderId}/status`,
+        `http://localhost:5000/api/${CLIENT_ID}/orders/${orderId}/status`,
         {
           method: "PATCH",
           headers: {
@@ -139,9 +139,9 @@ const RricuraOrders = () => {
               <th>Name</th>
               <th>Order #</th>
               <th>Email</th>
-              <th>Subtotal</th>
+
               <th>Total</th>
-              <th>Delivery Date</th>
+
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -161,11 +161,9 @@ const RricuraOrders = () => {
                     <td>{order.customerName}</td>
                     <td>{order.orderNumber}</td>
                     <td>{order.customerEmail}</td>
-                    <td>${order.subtotal?.toFixed(2)}</td>
+
                     <td>${order.total?.toFixed(2)}</td>
-                    <td>
-                      {order.deliveryDate} at {order.deliveryTime}
-                    </td>
+
                     <td>
                       {order.status}
                       {order.status === "Pending" && (
@@ -221,6 +219,20 @@ const RricuraOrders = () => {
                             ))}
                           </ul>
                           <p>
+                            <strong>PromoCode:</strong>
+                            {order.appliedPromoCode || "-"}
+                          </p>
+                          <p>
+                            <strong>Discount:</strong>
+                            {order.discountAmount > 0
+                              ? `-$${order.discountAmount.toFixed(2)}`
+                              : "-"}
+                          </p>
+                          <p>
+                            <strong>Subtotal:</strong>$
+                            {order.subtotal?.toFixed(2)}
+                          </p>
+                          <p>
                             <strong>Tax:</strong> ${order.tax?.toFixed(2)}
                           </p>
                           <p>
@@ -232,7 +244,11 @@ const RricuraOrders = () => {
                             {order.tip?.toFixed(2) || "0.00"}
                           </p>
                           <p>
-                            <strong>Address:</strong>{" "}
+                            <strong>DeliveryDate & Time:</strong>{" "}
+                            {order.deliveryDate} at {order.deliveryTime}
+                          </p>
+                          <p>
+                            <strong>Delivery Address:</strong>{" "}
                             {order.deliveryAddress?.fullAddress}
                           </p>
                           {order.deliveryAddress?.instructions && (
