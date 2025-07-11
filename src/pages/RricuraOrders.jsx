@@ -210,14 +210,28 @@ const RricuraOrders = () => {
                           <p>
                             <strong>Items:</strong>
                           </p>
+
                           <ul>
-                            {order.items?.map((item, idx) => (
-                              <li key={idx}>
-                                {item.quantity} {item.unit || ""} {item.name} —
-                                ${(item.basePrice * item.quantity).toFixed(2)}
-                              </li>
-                            ))}
+                            {order.items?.map((item, idx) => {
+                              let labelStart;
+
+                              if (item.unit) {
+                                labelStart = `${item.quantity} ${item.unit}`;
+                              } else if (item.size) {
+                                labelStart = `${item.quantity} ${item.size}`;
+                              } else {
+                                labelStart = `${item.quantity}x`;
+                              }
+
+                              return (
+                                <li key={idx}>
+                                  {labelStart} {item.name} — $
+                                  {(item.basePrice * item.quantity).toFixed(2)}
+                                </li>
+                              );
+                            })}
                           </ul>
+
                           <p>
                             <strong>PromoCode:</strong>
                             {order.appliedPromoCode || "-"}
