@@ -213,16 +213,9 @@ const RricuraOrders = () => {
 
                           <ul>
                             {order.items?.map((item, idx) => {
-                              let labelStart;
-
-                              if (item.unit) {
-                                labelStart = `${item.quantity} ${item.unit}`;
-                              } else if (item.size) {
-                                labelStart = `${item.quantity} ${item.size}`;
-                              } else {
-                                labelStart = `${item.quantity}x`;
-                              }
-
+                              const labelStart = `${item.quantity} ${
+                                item.size || item.unit || "x"
+                              }`;
                               return (
                                 <li key={idx}>
                                   {labelStart} {item.name} — $
