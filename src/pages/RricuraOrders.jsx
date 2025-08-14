@@ -52,7 +52,7 @@ const RricuraOrders = () => {
 
     try {
       const res = await fetch(
-        `https://elizabeth-backend.onrender.com/api/${CLIENT_ID}/orders?${params.toString()}`
+        `https://elizabeth-backend.onrender.com/${CLIENT_ID}/orders?${params.toString()}`
       );
       const data = await res.json();
       setFilteredOrders(data);
@@ -213,13 +213,37 @@ const RricuraOrders = () => {
 
                           <ul>
                             {order.items?.map((item, idx) => {
-                              const labelStart = `${item.quantity} ${
-                                item.size || item.unit || "x"
+                              const getItemDescription = (item) => {
+                                if (item.filling) {
+                                  let description = `${item.filling} tamale`;
+                                  if (item.wrapper)
+                                    description += ` - ${item.wrapper}`;
+                                  if (item.sauce && item.sauce !== "None")
+                                    description += ` - ${item.sauce} sauce`;
+                                  if (item.vegOil)
+                                    description += " - Veggie Oil";
+                                  if (item.fruit)
+                                    description += " - with Fruit";
+                                  return description;
+                                }
+                                if (item.name) return item.name;
+                                return "Custom item";
+                              };
+
+                              const labelStart = `${item.quantity}${
+                                item.size
+                                  ? " " + item.size
+                                  : item.unit
+                                  ? " " + item.unit
+                                  : ""
                               }`;
+
+                              const price = parseFloat(item.price) || 0;
+
                               return (
                                 <li key={idx}>
-                                  {labelStart} {item.name} — $
-                                  {(item.basePrice * item.quantity).toFixed(2)}
+                                  {labelStart} {getItemDescription(item)} — $
+                                  {(price * item.quantity).toFixed(2)}
                                 </li>
                               );
                             })}
