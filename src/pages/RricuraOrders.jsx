@@ -251,12 +251,12 @@ const RricuraOrders = () => {
 
                           <p>
                             <strong>PromoCode:</strong>
-                            {order.appliedPromoCode || "-"}
+                            {order.coupon || "-"}
                           </p>
                           <p>
                             <strong>Discount:</strong>
-                            {order.discountAmount > 0
-                              ? `-$${order.discountAmount.toFixed(2)}`
+                            {order.discount > 0
+                              ? `-$${order.discount.toFixed(2)}`
                               : "-"}
                           </p>
                           <p>
