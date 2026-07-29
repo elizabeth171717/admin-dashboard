@@ -205,6 +205,7 @@ const isToday = nextVolunteer?.date === today;
     <td>
       {editMode ? (
         <input
+        className="date"
           type="date"
           value={row.date ? row.date.split("T")[0] : ""}
           onChange={(e) =>
