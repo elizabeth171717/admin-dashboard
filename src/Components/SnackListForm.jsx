@@ -127,18 +127,7 @@ const isToday = nextVolunteer?.date === today;
       <strong>Student:</strong> {nextVolunteer.student}
     </p>
 
-    <p>
-      {new Date(nextVolunteer.date + "T00:00:00").toLocaleDateString(
-        "en-US",
-        {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-          timeZone: "America/New_York",
-        }
-      )}
-    </p>
+  
 
     <p>
       {isToday
