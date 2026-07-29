@@ -1,3 +1,4 @@
+
 import SnackListForm from "../components/SnackListForm";
 
 export default function SnackListPage() {
