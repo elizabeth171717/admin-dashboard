@@ -5,13 +5,13 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import LandingPage from "./Pages/LandingPage";
-import SignupPage from "./Pages/SignupPage";
-import Login from "./Pages/LoginPage";
-import AdminDashboard from "./Pages/AdminDashboard";
-import Home from "./Pages/Home";
-import SnackListPage from "./Pages/SnackListPage";
-import PublicSnackListPage from "./Pages/PublicSnackListPage";
+import LandingPage from "./pages/LandingPage";
+import SignupPage from "./pages/SignupPage";
+import Login from "./pages/LoginPage";
+import AdminDashboard from "./pages/AdminDashboard";
+import Home from "./pages/Home";
+import SnackListPage from "./pages/SnackListPage";
+import PublicSnackListPage from "./pages/PublicSnackListPage";
 
 function App() {
   return (
