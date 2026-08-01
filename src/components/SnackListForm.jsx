@@ -1,5 +1,6 @@
 import { useState} from "react";
 import axios from "axios";
+import QRCode from "react-qr-code";
 import { BACKEND_URL } from "../constants/constants";
 
 const client = import.meta.env.VITE_CLIENT;
@@ -307,6 +308,22 @@ const isToday = nextVolunteer?.date === today;
           <p>(809) 890-0890</p>
         </div>
       )}
+
+
+      <div
+  style={{
+    background: "#fff",
+    padding: "12px",
+    display: "inline-block",
+    borderRadius: "10px",
+    margin: "10px",
+  }}
+>
+  <QRCode
+    value={`https://bhopsnacks.netlify.app/public/${snackList._id}`}
+    size={180}
+  />
+</div>
     </div>
   );
 }
