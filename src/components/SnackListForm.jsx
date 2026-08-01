@@ -320,7 +320,7 @@ const isToday = nextVolunteer?.date === today;
   }}
 >
   <QRCode
-    value={`http://localhost:5177/admin`}
+    value={`https://bhopsnacks.netlify.app/admin`}
     size={180}
   />
 </div>
