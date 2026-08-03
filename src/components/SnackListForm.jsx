@@ -144,7 +144,7 @@ const isToday = nextVolunteer?.date === today;
               <th>Parent</th>
               <th>Student</th>
               <th>Date</th>
-              <th>Status</th>
+           {/*   <th>Status</th> */}
 
               {editMode && <th>Email</th>}
               {editMode && <th></th>}
@@ -219,7 +219,7 @@ const isToday = nextVolunteer?.date === today;
         ""
       )}
     </td>
-
+{/*
     <td>
       {editMode ? (
         <select
@@ -241,7 +241,7 @@ const isToday = nextVolunteer?.date === today;
         row.status
       )}
     </td>
-
+*/}
     {editMode && (
       <td>
         <input

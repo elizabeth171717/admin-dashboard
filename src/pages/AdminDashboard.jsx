@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../constants/constants";
 import CreateSnackListModal from "../components/CreateSnackListModal";
-import SnackListForm from "../components/SnackListForm";
-
+import PublicSnackListPage from "./PublicSnackListPage";
+import SnackListPage from "./SnackListPage";
 const client = import.meta.env.VITE_CLIENT;
 
 export default function AdminDashboard() {
   const [snackList, setSnackList] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  const [mode, setMode] = useState("owner");
+const navigate = useNavigate();
   // =============================
   // LOAD THE USER'S SNACK LIST
   // =============================
@@ -49,12 +51,26 @@ export default function AdminDashboard() {
           <h1>Buford Highway Orchestra</h1>
         </div>
 
+
         <h2>{snackList.listName}</h2>
 
-        <SnackListForm
-          snackList={snackList}
-          editMode={true}
-        />
+<div className="btns-container">
+  {mode === "owner" ? (
+    <button onClick={() => setMode("public")}>
+      Parent View
+    </button>
+  ) : (
+    <button onClick={() => setMode("owner")}>
+      Organizer View
+    </button>
+  )}
+</div>
+
+       {mode === "owner" ? (
+  <SnackListPage snackList={snackList} />
+) : (
+  <PublicSnackListPage snackList={snackList} />
+)}
       </div>
     );
   }

@@ -1,8 +1,10 @@
 
 import SnackListForm from "../components/SnackListForm";
 
-export default function SnackListPage() {
+export default function SnackListPage({ snackList }) {
   return (
-    <SnackListForm editMode={true} />
+    <SnackListForm 
+     snackList={snackList}
+    editMode={true} />
   );
 }

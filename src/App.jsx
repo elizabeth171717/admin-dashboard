@@ -10,9 +10,6 @@ import SignupPage from "./pages/SignupPage";
 import Login from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import Home from "./pages/Home";
-import SnackListPage from "./pages/SnackListPage";
-import PublicSnackListPage from "./pages/PublicSnackListPage";
-
 function App() {
   return (
     <Router>
@@ -25,15 +22,7 @@ function App() {
 
         <Route path="/home" element={<Home />} />
 
-        <Route
-          path="/snacklistpage"
-          element={<SnackListPage />}
-        />
-
-        <Route
-          path="/public"
-          element={<PublicSnackListPage />}
-        />
+        
       </Routes>
     </Router>
   );
