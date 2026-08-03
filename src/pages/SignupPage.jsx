@@ -38,9 +38,14 @@ localStorage.setItem("name", data.user.name);
 
   return (
     <div className="main-container">
+<button className="btn back-btn" onClick={() => navigate("/")}>
+      
+         ← Back
+      </button>
+
       <h1>Create Account</h1>
 
-      <form onSubmit={handleSignup}>
+      <form className="signup-box" onSubmit={handleSignup}>
         <input
           placeholder="Name"
           value={name}

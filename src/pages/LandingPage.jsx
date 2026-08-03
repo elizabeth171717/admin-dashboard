@@ -7,7 +7,7 @@ export default function LandingPage() {
   const navigate = useNavigate();
  
   return (
-    <div className="main container">
+    <div className="main-container">
       <div className="landing-card">
        
  <h1>Welcome</h1>

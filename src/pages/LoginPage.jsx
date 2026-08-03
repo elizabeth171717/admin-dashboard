@@ -47,6 +47,7 @@ export default function Login() {
       
          ← Back
       </button>
+      <div className="login-card">
       <h2>Login</h2>
       
       <form className="login-box" onSubmit={handleLogin}>
@@ -59,7 +60,7 @@ export default function Login() {
           required
         />
 
-        <div className="pw-input">
+       
           <input
             type={showPassword ? "text" : "password"}
             value={password}
@@ -76,7 +77,7 @@ export default function Login() {
               <i className="fa-solid fa-eye"></i>
             )}
           </span>
-        </div>
+      
 
 
 
@@ -87,6 +88,7 @@ export default function Login() {
       
 
       </form>
+      </div>
     </div>
   );
 }

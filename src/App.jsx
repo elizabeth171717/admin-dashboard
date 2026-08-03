@@ -9,7 +9,7 @@ import LandingPage from "./pages/LandingPage";
 import SignupPage from "./pages/SignupPage";
 import Login from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
-import Home from "./pages/Home";
+
 function App() {
   return (
     <Router>
@@ -20,8 +20,7 @@ function App() {
       
       <Route path="/signup" element={<SignupPage />} />
 
-        <Route path="/home" element={<Home />} />
-
+     
         
       </Routes>
     </Router>

@@ -264,7 +264,7 @@ const isToday = nextVolunteer?.date === today;
           </tbody>
         </table>
       </div>
-
+<div className="btn-container">
       {editMode && (
         <div className="add-parent-container">
           <button
@@ -297,7 +297,7 @@ const isToday = nextVolunteer?.date === today;
         </div>
       )}
 
-
+</div>
       <div
   style={{
     background: "#fff",
