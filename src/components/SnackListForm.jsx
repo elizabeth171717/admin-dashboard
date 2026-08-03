@@ -192,33 +192,21 @@ const isToday = nextVolunteer?.date === today;
       )}
     </td>
 
-    <td>
-      {editMode ? (
-        <input
-        className="date"
-          type="date"
-          value={row.date ? row.date.split("T")[0] : ""}
-          onChange={(e) =>
-            updateRow(
-              row._id || row.tempId,
-              "date",
-              e.target.value
-            )
-          }
-        />
-      ) : row.date ? (
-        new Date(row.date).toLocaleDateString(
-          "en-US",
-          {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          }
-        )
-      ) : (
-        ""
-      )}
-    </td>
+   <td>
+  <input
+    className="date"
+    type="date"
+    value={row.date ? row.date.split("T")[0] : ""}
+    disabled={!editMode}
+    onChange={(e) =>
+      updateRow(
+        row._id || row.tempId,
+        "date",
+        e.target.value
+      )
+    }
+  />
+</td>
 {/*
     <td>
       {editMode ? (

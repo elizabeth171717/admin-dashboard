@@ -6,24 +6,22 @@
 .main-container{
     width: 100%;
     background-color: rgb(194, 147, 76);
-    padding: 1rem;
+    padding: 1rem .50rem;
     max-width: 380px;
 }
 
-.page-title{
-    background-color: blueviolet;
-}
+
 
 .form-container{
-    background-color: blue;
+    
     width: 100%;
 }
 table{
  border-collapse: collapse;
    border: 1px solid black;
   width: 100%;
-  font-size: x-small;
-  margin: 1rem 0;
+ 
+  margin: 2rem 0;
 }
 
 table, th, td {
@@ -31,7 +29,7 @@ table, th, td {
 }
 
 td{
-    padding: .20rem;
+    padding: .10rem;
       overflow-wrap: anywhere;
 }
 
@@ -39,15 +37,11 @@ input,
 select {
   width: 100%;
   box-sizing: border-box;
-  font-size: x-small;
-}
-.date{
-    font-size: xx-small;
+  
 }
 
-.status{
-    font-size: xx-small;
-}
+
+
 /* ================================
    NEXT SNACK VOLUNTEER CARD
 ================================ */
