@@ -47,11 +47,7 @@ const navigate = useNavigate();
   if (snackList) {
     return (
       <div className="main-container">
-        <div className="page-title">
-          <h1>Buford Highway Orchestra</h1>
-        </div>
-
-
+ 
         <h2>{snackList.listName}</h2>
 
 <div className="btns-container">
@@ -79,17 +75,17 @@ const navigate = useNavigate();
   // USER DOESN'T HAVE A SNACK LIST
   // =============================
   return (
-    <div>
+    <div className="main-container">
       <div className="page-title">
-        <h1>Buford Highway Orchestra</h1>
+        <h1>BHOP SNACKS</h1>
       </div>
-
-      <button
+<div className="btns-container">
+      <button className="btn"
         onClick={() => setShowModal(true)}
       >
         Create a Snack List
       </button>
-
+</div>
       <CreateSnackListModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}

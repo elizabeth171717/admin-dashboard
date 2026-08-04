@@ -72,7 +72,7 @@ localStorage.setItem("name", data.user.name);
           }
         />
 
-        <button type="submit">
+        <button className="btn" type="submit">
           Create Account
         </button>
       </form>

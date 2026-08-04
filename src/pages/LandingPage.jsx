@@ -10,7 +10,8 @@ export default function LandingPage() {
     <div className="main-container">
       <div className="landing-card">
        
- <h1>Welcome</h1>
+ <h1>BHOP SNACKS</h1>
+ <h2>Welcome</h2>
         <p>Create your snack list now</p>
 
 

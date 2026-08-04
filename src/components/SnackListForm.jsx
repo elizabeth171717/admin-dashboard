@@ -137,7 +137,7 @@ const isToday = nextVolunteer?.date === today;
     </p>
   </div>
 )}
-      <div className="form-container">
+      <div className="table-container">
         <table>
           <thead>
             <tr>
@@ -264,20 +264,20 @@ const isToday = nextVolunteer?.date === today;
           </tbody>
         </table>
       </div>
-<div className="btn-container">
+
       {editMode && (
-        <div className="add-parent-container">
+        <div className="btns-container">
           <button
-            className="add-parent-btn"
+            className="btn add-parent-btn"
             onClick={addParent}
           >
             + Add Parent
           </button>
 
           <button
-            className="save-btn"
+            className="btn save-btn"
             onClick={saveSnackList}
-            style={{ marginLeft: "12px" }}
+        
           >
             💾 Save List
           </button>
@@ -297,7 +297,7 @@ const isToday = nextVolunteer?.date === today;
         </div>
       )}
 
-</div>
+
       <div
   style={{
     background: "#fff",
