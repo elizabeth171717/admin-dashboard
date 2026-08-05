@@ -129,11 +129,12 @@ td{
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin: 1rem;
+    margin: 1rem 0;
   }
 
   .table-container table {
-    min-width: 700px; /* or whatever width your columns need */
+    width: 100%;
+    min-width: 400px; /* or whatever width your columns need */
     width: max-content;
   }
 
