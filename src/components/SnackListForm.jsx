@@ -297,7 +297,7 @@ const isToday = nextVolunteer?.date === today;
         </div>
       )}
 
-{/*<
+{/*
       <div
   style={{
     background: "#fff",
@@ -308,7 +308,7 @@ const isToday = nextVolunteer?.date === today;
   }}
 >
   <QRCode
-    value={`https://bhopsnacks.netlify.app/admin`}
+    value={`https://bhopsnacks.netlify.app/public-page`}
     size={180}
   />
 </div>
