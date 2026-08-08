@@ -47,7 +47,13 @@ const navigate = useNavigate();
   if (snackList) {
     return (
       <div className="main-container">
- 
+ <button
+  onClick={() => navigate("/public-page")}
+  className="btn"
+>
+  Public Page
+</button>
+
         <h2>{snackList.listName}</h2>
 
 <div className="btns-container">

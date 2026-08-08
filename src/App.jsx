@@ -10,6 +10,7 @@ import SignupPage from "./pages/SignupPage";
 import Login from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 
+import PublicPage from "./pages/PublicPage"
 function App() {
   return (
     <Router>
@@ -20,7 +21,7 @@ function App() {
       
       <Route path="/signup" element={<SignupPage />} />
 
-     
+      <Route path="/public-page" element={<PublicPage />} />
         
       </Routes>
     </Router>
