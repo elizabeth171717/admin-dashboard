@@ -297,7 +297,7 @@ const isToday = nextVolunteer?.date === today;
         </div>
       )}
 
-
+{/*<
       <div
   style={{
     background: "#fff",
@@ -312,6 +312,7 @@ const isToday = nextVolunteer?.date === today;
     size={180}
   />
 </div>
+*/}
     </div>
   );
 }

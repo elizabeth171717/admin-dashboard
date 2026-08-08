@@ -36,12 +36,12 @@ export default function PublicPage() {
   }
 
   return (
-    <>
+    <div className="main-container">
      <h2>{snackList.listName}</h2>
     
     <PublicSnackListPage
       snackList={snackList}
     />
-    </>
+    </div>
   );
 }
