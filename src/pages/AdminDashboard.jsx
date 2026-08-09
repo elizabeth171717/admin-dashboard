@@ -48,7 +48,8 @@ const navigate = useNavigate();
     return (
       <div className="main-container">
  <button
-  onClick={() => navigate("/public-page")}
+ 
+   onClick={() => navigate(`/public-page/${snackList.slug}`)}
   className="btn"
 >
   Public Page

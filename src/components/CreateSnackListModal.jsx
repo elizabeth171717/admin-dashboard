@@ -10,7 +10,7 @@ export default function CreateSnackListModal({
   onCreate,
 }) {
   const [listName, setListName] = useState("");
-  const [organizer, setOrganizer] = useState("");
+ 
   const [saving, setSaving] = useState(false);
 
   if (!isOpen) return null;
@@ -23,11 +23,6 @@ export default function CreateSnackListModal({
       return;
     }
 
-    if (!organizer.trim()) {
-      alert("Please enter the organizer's name.");
-      return;
-    }
-
     try {
       setSaving(true);
 
@@ -37,7 +32,7 @@ export default function CreateSnackListModal({
         `${BACKEND_URL}/api/${client}/snack-list`,
         {
           listName,
-          organizer,
+         
           rows: [],
         },
         {
@@ -52,7 +47,7 @@ export default function CreateSnackListModal({
 
       // Reset the form.
       setListName("");
-      setOrganizer("");
+    
 
       // Close the modal.
       onClose();
@@ -75,7 +70,7 @@ export default function CreateSnackListModal({
           <h2>Create Snack List</h2>
 
           <button
-            type="button"
+            type="btn"
             className="close-btn"
             onClick={onClose}
             disabled={saving}
@@ -86,7 +81,7 @@ export default function CreateSnackListModal({
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Snack List Name</label>
+            <label><h2>Snack List Name : </h2></label>
 
             <input
               type="text"
@@ -97,22 +92,12 @@ export default function CreateSnackListModal({
             />
           </div>
 
-          <div className="form-group">
-            <label>Organizer Name</label>
+        
 
-            <input
-              type="text"
-              placeholder="Elizabeth"
-              value={organizer}
-              onChange={(e) => setOrganizer(e.target.value)}
-              disabled={saving}
-            />
-          </div>
-
-          <div className="modal-buttons">
+          <div className="modal-buttons btns-container">
             <button
-              type="button"
-              className="cancel-btn"
+              type="btn"
+              className="btn"
               onClick={onClose}
               disabled={saving}
             >
@@ -121,7 +106,7 @@ export default function CreateSnackListModal({
 
             <button
               type="submit"
-              className="save-btn"
+              className="btn"
               disabled={saving}
             >
               {saving ? "Creating..." : "Create List"}

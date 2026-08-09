@@ -36,7 +36,7 @@ const saveSnackList = async () => {
       `${BACKEND_URL}/api/${client}/snack-list`,
       {
         listName: snackList.listName,
-        organizer: snackList.organizer,
+       
         rows,
       },
       {
@@ -297,7 +297,7 @@ const isToday = nextVolunteer?.date === today;
         </div>
       )}
 
-{/*
+
       <div
   style={{
     background: "#fff",
@@ -312,7 +312,7 @@ const isToday = nextVolunteer?.date === today;
     size={180}
   />
 </div>
-*/}
+
     </div>
   );
 }

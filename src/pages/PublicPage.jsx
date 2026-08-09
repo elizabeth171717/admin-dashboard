@@ -1,47 +1,57 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../constants/constants";
 import PublicSnackListPage from "./PublicSnackListPage";
 
 const client = import.meta.env.VITE_CLIENT;
 
 export default function PublicPage() {
+  const { slug } = useParams();
+
   const [snackList, setSnackList] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadSnackList = async () => {
+    const loadPublicSnackList = async () => {
       try {
-        const token = localStorage.getItem("token");
-
         const { data } = await axios.get(
-          `${BACKEND_URL}/api/${client}/snacklist`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `${BACKEND_URL}/api/${client}/public-snacklist/${slug}`
         );
+
+        console.log("PUBLIC SNACK LIST:", data);
 
         setSnackList(data);
       } catch (err) {
-        console.error("Failed to load snack list:", err);
+        console.error(
+          "Failed to load public snack list:",
+          err
+        );
+      } finally {
+        setLoading(false);
       }
     };
 
-    loadSnackList();
-  }, []);
+    loadPublicSnackList();
+  }, [slug]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (!snackList) {
-    return <p>Loading...</p>;
+    return <p>Snack list not found.</p>;
   }
 
   return (
     <div className="main-container">
-     <h2>{snackList.listName}</h2>
-    
-    <PublicSnackListPage
-      snackList={snackList}
-    />
+
+      <h1>{snackList.listName}</h1>
+
+      <PublicSnackListPage
+        snackList={snackList}
+      />
+
     </div>
   );
 }
