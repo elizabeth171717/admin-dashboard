@@ -125,6 +125,9 @@ td{
       overflow-wrap: anywhere;
 }
 
+td{
+padding-left: .25rem;
+}
 @media (max-width: 768px) {
 
   .table-container {
@@ -156,3 +159,8 @@ td{
    NEXT SNACK VOLUNTEER
 ================================ */
 
+
+
+.public-snack-page{
+  padding: 1rem;
+}

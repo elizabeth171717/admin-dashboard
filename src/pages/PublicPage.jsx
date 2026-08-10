@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../constants/constants";
-import PublicSnackListPage from "./PublicSnackListPage";
 
 const CLIENT_ID = "snacks";
 const SNACK_LIST_SLUG = "guitar-hzyjtp";
@@ -17,6 +16,8 @@ export default function PublicPage() {
           `${BACKEND_URL}/api/${CLIENT_ID}/public-snacklist/${SNACK_LIST_SLUG}`
         );
 
+        console.log("PUBLIC SNACK LIST:", res.data);
+
         setSnackList(res.data);
       } catch (err) {
         console.error("Failed to load snack list:", err);
@@ -29,20 +30,38 @@ export default function PublicPage() {
   }, []);
 
   if (loading) {
-    return <p style={{ textAlign: "center" }}>Loading snack list...</p>;
+    return <p>Loading snack list...</p>;
   }
 
   if (!snackList) {
-    return (
-      <p style={{ textAlign: "center" }}>
-        Snack list not available
-      </p>
-    );
+    return <p>Snack list not available.</p>;
   }
 
   return (
-    <PublicSnackListPage
-      snackList={snackList}
-    />
+    <div className="public-snack-page">
+
+      <h1>{snackList.listName}</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Parent</th>
+            <th>Student</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {snackList.rows.map((row) => (
+            <tr key={row._id}>
+              <td>{row.parent}</td>
+              <td>{row.student}</td>
+              <td>{row.date}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+    </div>
   );
 }
