@@ -21,7 +21,7 @@ function App() {
       
       <Route path="/signup" element={<SignupPage />} />
 
-      <Route path="/public-page/:slug" element={<PublicPage />} />
+      <Route path="/public-page" element={<PublicPage />} />
         
       </Routes>
     </Router>

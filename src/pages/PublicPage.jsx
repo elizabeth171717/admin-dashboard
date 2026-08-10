@@ -1,57 +1,48 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../constants/constants";
 import PublicSnackListPage from "./PublicSnackListPage";
 
-const client = import.meta.env.VITE_CLIENT;
+const CLIENT_ID = "snacks";
+const SNACK_LIST_SLUG = "guitar-hzyjtp";
 
 export default function PublicPage() {
-  const { slug } = useParams();
-
   const [snackList, setSnackList] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadPublicSnackList = async () => {
+    const loadSnackList = async () => {
       try {
-        const { data } = await axios.get(
-          `${BACKEND_URL}/api/${client}/public-snacklist/${slug}`
+        const res = await axios.get(
+          `${BACKEND_URL}/api/${CLIENT_ID}/public-snacklist/${SNACK_LIST_SLUG}`
         );
 
-        console.log("PUBLIC SNACK LIST:", data);
-
-        setSnackList(data);
+        setSnackList(res.data);
       } catch (err) {
-        console.error(
-          "Failed to load public snack list:",
-          err
-        );
+        console.error("Failed to load snack list:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    loadPublicSnackList();
-  }, [slug]);
+    loadSnackList();
+  }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p style={{ textAlign: "center" }}>Loading snack list...</p>;
   }
 
   if (!snackList) {
-    return <p>Snack list not found.</p>;
+    return (
+      <p style={{ textAlign: "center" }}>
+        Snack list not available
+      </p>
+    );
   }
 
   return (
-    <div className="main-container">
-
-      <h1>{snackList.listName}</h1>
-
-      <PublicSnackListPage
-        snackList={snackList}
-      />
-
-    </div>
+    <PublicSnackListPage
+      snackList={snackList}
+    />
   );
 }
