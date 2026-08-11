@@ -120,6 +120,10 @@ table, th, td {
   border: 1px solid black; /* Sets thickness, style, and color */
 }
 
+th{
+  padding: .25rem 0;
+}
+
 td{
     padding: .10rem;
       overflow-wrap: anywhere;

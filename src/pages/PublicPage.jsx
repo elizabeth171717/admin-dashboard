@@ -37,17 +37,61 @@ export default function PublicPage() {
     return <p>Snack list not available.</p>;
   }
 
+
+
+
+// NEXT SNACK VOLUNTEER
+  // =============================
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/New_York",
+  }).format(new Date());
+
+  const sortedRows = [...snackList.rows]
+    .filter((row) => row.date)
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const nextVolunteer =
+    sortedRows.find((row) => row.date === today) ||
+    sortedRows.find((row) => row.date > today);
+
+  const isToday = nextVolunteer?.date === today;
+
   return (
     <div className="public-snack-page">
 
-      <h1>{snackList.listName}</h1>
+      <h2>{snackList.listName}</h2>
+
+        {nextVolunteer && (
+  <div className="next-snack-card">
+    <p>
+      {isToday
+        ? "🎉 Today's Snack Volunteer"
+        : "🍎 Next Snack Volunteer"}
+    </p>
+
+    <p>{nextVolunteer.parent}</p>
+
+    <p>
+      <strong>Student:</strong> {nextVolunteer.student}
+    </p>
+
+  
+
+    <p>
+      {isToday
+        ? "Please remember to bring the class snack today."
+        : "Thank you for helping make snack time special!"}
+    </p>
+  </div>
+)}
+   
 
       <table>
         <thead>
           <tr>
-            <th>Parent</th>
-            <th>Student</th>
-            <th>Date</th>
+            <th>Padre</th>
+            <th>Estudiante</th>
+            <th>Fecha</th>
           </tr>
         </thead>
 
@@ -56,7 +100,11 @@ export default function PublicPage() {
             <tr key={row._id}>
               <td>{row.parent}</td>
               <td>{row.student}</td>
-              <td>{row.date}</td>
+              <td>{new Intl.DateTimeFormat("es-ES", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(new Date(`${row.date}T00:00:00`))}</td>
             </tr>
           ))}
         </tbody>

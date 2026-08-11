@@ -96,48 +96,10 @@ const addParent = () => {
   );
 };
  
-// =============================
-// NEXT SNACK VOLUNTEER
-// =============================
-const today = new Intl.DateTimeFormat("en-CA", {
-  timeZone: "America/New_York",
-}).format(new Date());
 
-const sortedRows = [...rows]
-  .filter((row) => row.date)
-  .sort((a, b) => a.date.localeCompare(b.date));
-
-const nextVolunteer =
-  sortedRows.find((row) => row.date === today) ||
-  sortedRows.find((row) => row.date > today);
-
-const isToday = nextVolunteer?.date === today;
   return (
     <div className="page-container">
-  {nextVolunteer && (
-  <div className="next-snack-card">
-    <p>
-      {isToday
-        ? "🎉 Today's Snack Volunteer"
-        : "🍎 Next Snack Volunteer"}
-    </p>
-
-    <p>{nextVolunteer.parent}</p>
-
-    <p>
-      <strong>Student:</strong> {nextVolunteer.student}
-    </p>
-
-  
-
-    <p>
-      {isToday
-        ? "Please remember to bring the class snack today."
-        : "Thank you for helping make snack time special!"}
-    </p>
-  </div>
-)}
-      <div className="table-container">
+   <div className="table-container">
         <table>
           <thead>
             <tr>
