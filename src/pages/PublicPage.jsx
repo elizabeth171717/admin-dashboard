@@ -65,22 +65,22 @@ export default function PublicPage() {
   <div className="next-snack-card">
     <p>
       {isToday
-        ? "🎉 Today's Snack Volunteer"
-        : "🍎 Next Snack Volunteer"}
+        ? "🎉 La persona encargada de los snacks hoy es"
+        : "🍎 El turno siguiente de traer snacks es para"}
     </p>
 
     <p>{nextVolunteer.parent}</p>
 
     <p>
-      <strong>Student:</strong> {nextVolunteer.student}
+      <strong>Estudiante:</strong> {nextVolunteer.student}
     </p>
 
   
 
     <p>
       {isToday
-        ? "Please remember to bring the class snack today."
-        : "Thank you for helping make snack time special!"}
+        ? "Porfavor recuerda traer los snacks hoy, y muchas gracias de antemano."
+        : "Gracias por aser el momento de los snack unn momento especial!"}
     </p>
   </div>
 )}
@@ -89,9 +89,9 @@ export default function PublicPage() {
       <table>
         <thead>
           <tr>
-            <th>Padre</th>
-            <th>Estudiante</th>
-            <th>Fecha</th>
+            <th  style={{ background: 'blue', color: 'white'}}>Padre</th>
+            <th style={{ background: 'yellow'}}>Estudiante</th>
+            <th style={{ background: 'red', color: 'white'}}>Fecha</th>
           </tr>
         </thead>
 
