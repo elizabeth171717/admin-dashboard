@@ -59,7 +59,7 @@ export default function PublicPage() {
   return (
     <div className="public-snack-page">
 
-      <h2>{snackList.listName}</h2>
+      <h2 className="snack-list-name">{snackList.listName}</h2>
 
         {nextVolunteer && (
   <div className="next-snack-card">
