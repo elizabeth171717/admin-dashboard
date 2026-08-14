@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../constants/constants";
-
+import { useParams } from "react-router-dom";
 const CLIENT_ID = "snacks";
-const SNACK_LIST_SLUG = "guitar-hzyjtp";
+
 
 export default function PublicPage() {
+    const { slug } = useParams();
   const [snackList, setSnackList] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +14,8 @@ export default function PublicPage() {
     const loadSnackList = async () => {
       try {
         const res = await axios.get(
-          `${BACKEND_URL}/api/${CLIENT_ID}/public-snacklist/${SNACK_LIST_SLUG}`
+         
+           `${BACKEND_URL}/api/${CLIENT_ID}/public-snacklist/${slug}`
         );
 
         console.log("PUBLIC SNACK LIST:", res.data);

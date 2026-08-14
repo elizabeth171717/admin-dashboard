@@ -31,6 +31,8 @@ const navigate = useNavigate();
 
         console.log("SNACK LIST:", data);
 
+console.log("SNACK LIST SLUG:", data?.slug);
+
         // data will either be the snack list or null
         setSnackList(data);
       } catch (err) {
@@ -48,8 +50,8 @@ const navigate = useNavigate();
     return (
       <div className="main-container">
  <button
- 
-   onClick={() => navigate("/public-page")}
+
+    onClick={() => navigate(`/public-page/${snackList.slug}`)}
   className="btn"
 >
   Public Page

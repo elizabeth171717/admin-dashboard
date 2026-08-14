@@ -20,9 +20,10 @@ function App() {
       <Route path="/admin" element={<AdminDashboard />} />
       
       <Route path="/signup" element={<SignupPage />} />
-
-      <Route path="/public-page" element={<PublicPage />} />
-        
+        <Route
+  path="/public-page/:slug"
+  element={<PublicPage />}
+/>
       </Routes>
     </Router>
   );
