@@ -270,7 +270,8 @@ const addParent = () => {
   }}
 >
   <QRCode
-    value={`https://bhopsnacks.netlify.app/public-page`}
+
+     value={`https://bhopsnacks.netlify.app/public-page/${snackList.slug}`}
     size={180}
   />
 </div>

@@ -166,7 +166,8 @@ padding-left: .25rem;
 
 
 .public-snack-page{
-  padding: 1rem;
+  padding: 1rem .50rem;
+
    background-image: url('/src/assets/logo.png'); /* Paths in public start with / */
  background-size:10%;
   background-position: top right;
@@ -175,6 +176,6 @@ background-repeat: no-repeat;
 
 .snack-list-name{
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: .50rem;
 }
 

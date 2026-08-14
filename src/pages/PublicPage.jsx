@@ -62,7 +62,7 @@ export default function PublicPage() {
     <div className="public-snack-page">
 
       <h2 className="snack-list-name">{snackList.listName}</h2>
-
+       <h3>Lista de snacks</h3>
         {nextVolunteer && (
   <div className="next-snack-card">
     <p>
@@ -90,10 +90,10 @@ export default function PublicPage() {
 
       <table>
         <thead>
-          <tr>
-            <th  style={{ background: 'blue', color: 'white'}}>Padre</th>
-            <th style={{ background: 'yellow'}}>Estudiante</th>
-            <th style={{ background: 'red', color: 'white'}}>Fecha</th>
+          <tr style={{ background: 'red', color: 'white'}}>
+            <th>Padre</th>
+            <th>Estudiante</th>
+            <th>Fecha</th>
           </tr>
         </thead>
 
