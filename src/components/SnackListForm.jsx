@@ -1,6 +1,6 @@
 import { useState} from "react";
 import axios from "axios";
-import QRCode from "react-qr-code";
+
 import { BACKEND_URL } from "../constants/constants";
 
 const client = import.meta.env.VITE_CLIENT;
@@ -14,6 +14,7 @@ const createEmptyRow = () => ({
   date: "",
   status: "Upcoming",
   email: "",
+phone: "",
 });
 
 
@@ -107,9 +108,9 @@ const addParent = () => {
               <th>Student</th>
               <th>Date</th>
            {/*   <th>Status</th> */}
-
+{editMode && <th>Phone</th>}
               {editMode && <th>Email</th>}
-              {editMode && <th></th>}
+               {editMode && <th></th>}
             </tr>
           </thead>
 
@@ -192,6 +193,24 @@ const addParent = () => {
       )}
     </td>
 */}
+{editMode && (
+  <td>
+    <input
+      type="tel"
+      placeholder="999-999-9999"
+      value={row.phone ?? ""}
+      onChange={(e) =>
+        updateRow(
+          row._id || row.tempId,
+          "phone",
+          e.target.value
+        )
+      }
+    />
+  </td>
+)}
+
+
     {editMode && (
       <td>
         <input
@@ -247,34 +266,7 @@ const addParent = () => {
         </div>
       )}
 
-      {!editMode && (
-        <div className="contact-info">
-          <h2>
-            If you need to make any changes,
-            please contact me.
-          </h2>
 
-          <p>Elizabeth Torres</p>
-          <p>(809) 890-0890</p>
-        </div>
-      )}
-
-
-      <div
-  style={{
-    background: "#fff",
-    padding: "12px",
-    display: "inline-block",
-    borderRadius: "10px",
-    margin: "10px",
-  }}
->
-  <QRCode
-
-     value={`https://bhopsnacks.netlify.app/public-page/${snackList.slug}`}
-    size={180}
-  />
-</div>
 
     </div>
   );

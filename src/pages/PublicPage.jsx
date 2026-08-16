@@ -111,7 +111,15 @@ export default function PublicPage() {
           ))}
         </tbody>
       </table>
+  <div className="contact-info">
+          <h2>
+            If you need to make any changes,
+            please contact me.
+          </h2>
 
+          <p>Elizabeth </p>
+          <p>770-896-2564</p>
+        </div>
     </div>
   );
 }
