@@ -66,18 +66,7 @@ export default function CreateSnackListModal({
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <div className="modal-header">
-          <h2>Create Snack List</h2>
-
-          <button
-            type="btn"
-            className="close-btn"
-            onClick={onClose}
-            disabled={saving}
-          >
-            ✕
-          </button>
-        </div>
+      
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
