@@ -113,7 +113,7 @@ table{
    border: 1px solid black;
   width: 100%;
  
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 table, th, td {
@@ -176,10 +176,15 @@ background-repeat: no-repeat;
 
 .snack-list-name{
   text-align: center;
-  margin-bottom: .50rem;
+  margin-bottom: 1rem;
 }
 
 .next-snack-card{
-  
-  color: blue;
+  margin-top: 1rem;
+  background-color: yellow;
+ padding: .50rem;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 1rem;
 }

@@ -71,10 +71,10 @@ export default function PublicPage() {
         : "🍎 El turno siguiente de traer snacks es para"}
     </p>
 
-    <p>{nextVolunteer.parent}</p>
+    <p > <strong> {nextVolunteer.parent}</strong></p>
 
     <p>
-      <strong>Estudiante:</strong> {nextVolunteer.student}
+      Estudiante: <strong>{nextVolunteer.student}</strong> 
     </p>
 
   
