@@ -188,3 +188,15 @@ background-repeat: no-repeat;
   max-width: 500px;
   border-radius: 1rem;
 }
+
+/* PAST SNACK DATES */
+.past-snack-row td {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* NEXT SNACK DATE */
+.next-snack-row td {
+  background: yellow;
+  font-weight: 600;
+}

@@ -58,6 +58,9 @@ export default function PublicPage() {
 
   const isToday = nextVolunteer?.date === today;
 
+const nextSnackDate = nextVolunteer?.date;
+  
+
   return (
     <div className="public-snack-page">
 
@@ -77,13 +80,7 @@ export default function PublicPage() {
       Estudiante: <strong>{nextVolunteer.student}</strong> 
     </p>
 
-  
 
-    <p>
-      {isToday
-        ? "Porfavor recuerda traer los snacks hoy, y muchas gracias de antemano."
-        : "Gracias por aser el momento de los snack unn momento especial!"}
-    </p>
   </div>
 )}
    
@@ -97,19 +94,37 @@ export default function PublicPage() {
           </tr>
         </thead>
 
-        <tbody>
-          {snackList.rows.map((row) => (
-            <tr key={row._id}>
-              <td>{row.parent}</td>
-              <td>{row.student}</td>
-              <td>{new Intl.DateTimeFormat("es-ES", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(new Date(`${row.date}T00:00:00`))}</td>
-            </tr>
-          ))}
-        </tbody>
+     <tbody>
+  {snackList.rows.map((row) => {
+    const isPast = row.date && row.date < today;
+    const isNext = row.date === nextSnackDate;
+
+    return (
+      <tr
+        key={row._id}
+        className={
+          isNext
+            ? "next-snack-row"
+            : isPast
+            ? "past-snack-row"
+            : ""
+        }
+      >
+        <td>{row.parent}</td>
+
+        <td>{row.student}</td>
+
+        <td>
+          {new Intl.DateTimeFormat("es-ES", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          }).format(new Date(`${row.date}T00:00:00`))}
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
       </table>
   <div className="contact-info">
           <h2>
