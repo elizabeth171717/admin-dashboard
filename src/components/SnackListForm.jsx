@@ -16,7 +16,9 @@ const createEmptyRow = () => ({
   email: "",
 phone: "",
 });
-
+const [showAddParentModal, setShowAddParentModal] = useState(false);
+const [newParent, setNewParent] = useState("");
+const [newStudent, setNewStudent] = useState("");
 
 
   const [rows, setRows] = useState(
@@ -72,11 +74,37 @@ const saveSnackList = async () => {
   // ADD ROW
   // =============================
   
+
 const addParent = () => {
+  setNewParent("");
+  setNewStudent("");
+  setShowAddParentModal(true);
+};
+
+
+
+const saveNewParent = () => {
+  if (!newParent.trim() || !newStudent.trim()) {
+    alert("Please enter the parent name and student name.");
+    return;
+  }
+
+  const newRow = {
+    tempId: crypto.randomUUID(),
+    parent: newParent.trim(),
+    student: newStudent.trim(),
+    date: "",
+    status: "Upcoming",
+    email: "",
+    phone: "",
+  };
+
   setRows((currentRows) => [
     ...currentRows,
-    createEmptyRow(),
+    newRow,
   ]);
+
+  setShowAddParentModal(false);
 };
 
   // =============================
@@ -267,7 +295,61 @@ const addParent = () => {
       )}
 
 
+{showAddParentModal && (
+  <div className="add-parent-modal-overlay">
+    <div className="add-parent-modal">
 
+      <h2>Add Parent</h2>
+
+      <p>
+        Enter the parent and student information.
+      </p>
+
+      <div className="add-parent-field">
+        <label>Parent Name *</label>
+
+        <input
+          type="text"
+          placeholder="Parent name"
+          value={newParent}
+          onChange={(e) => setNewParent(e.target.value)}
+          autoFocus
+        />
+      </div>
+
+      <div className="add-parent-field">
+        <label>Student Name *</label>
+
+        <input
+          type="text"
+          placeholder="Student name"
+          value={newStudent}
+          onChange={(e) => setNewStudent(e.target.value)}
+        />
+      </div>
+
+      <div className="add-parent-modal-buttons">
+
+        <button
+          type="button"
+          onClick={() => setShowAddParentModal(false)}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          className="btn"
+          onClick={saveNewParent}
+        >
+          Save & Add
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+)}
     </div>
   );
 }
