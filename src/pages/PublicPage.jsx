@@ -61,11 +61,19 @@ export default function PublicPage() {
 const nextSnackDate = nextVolunteer?.date;
   
 
+const studentCount = new Set(
+  snackList.rows
+    .map((row) => row.student?.trim().toLowerCase())
+    .filter(Boolean)
+).size;
+
   return (
     <div className="public-snack-page">
 
       <h2 className="snack-list-name">{snackList.listName}</h2>
-       <h3>Lista de snacks - 19 Estudiantes</h3>
+     
+<h3>Lista de snacks - {studentCount} Estudiantes</h3>
+
         {nextVolunteer && (
   <div className="next-snack-card">
     <p>
